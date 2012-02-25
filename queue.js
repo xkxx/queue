@@ -12,7 +12,8 @@
         head, tail, // singly-linked list of deferrals
         error = null,
         results = [],
-        await = noop;
+        await = noop,
+        D = {};
 
     if (arguments.length < 1) parallelism = Infinity;
 
@@ -43,7 +44,8 @@
         if (head === tail) head = tail = null;
         else head = head.next;
         ++active;
-        a.push(function(e, r) {
+        // replace defer identifier queue.D with callback
+        a.splice(a.indexOf(queue.D), 1, function(e, r) {
           --active;
           if (e) {
             if (remaining) {
