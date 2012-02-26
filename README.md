@@ -6,8 +6,8 @@ For example, if you wanted to stat two files in parallel:
 
 ```js
 queue()
-    .defer(fs.stat, __dirname + "/../Makefile")
-    .defer(fs.stat, __dirname + "/../package.json")
+    .defer(fs.stat, __dirname + "/../Makefile", queue.D)
+    .defer(fs.stat, __dirname + "/../package.json", queue.D)
     .await(function(error, results) { console.log(results); });
 ```
 
@@ -15,7 +15,7 @@ Or, if you wanted to run a bazillion asynchronous tasks (here represented as an 
 
 ```js
 var q = queue(1);
-tasks.forEach(function(t) { q.defer(t); });
+tasks.forEach(function(t) { q.defer(t, queue.D); });
 q.await(function(error, results) { console.log("all done!"); });
 ```
 
@@ -29,7 +29,7 @@ Constructs a new queue with the specified *parallelism*. If *parallelism* is not
 
 ### queue.defer(method[, arguments…])
 
-Adds the specified *method* to the queue, with any optional *arguments*.
+Adds the specified *method* to the queue, with any optional *arguments*. Use *queue.D* as the placeholder for the callback.
 
 ### queue.await(callback)
 
