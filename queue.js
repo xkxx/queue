@@ -4,7 +4,7 @@
 
   queue.version = "0.0.1";
 
-  function queue(P) {
+  function queue(parallelism) {
     var queue = {},
         active = 0, // number of in-flight deferrals
         remaining = 0, // number of deferrals remaining
@@ -15,7 +15,7 @@
         await = noop,
         D = {};
 
-    parallelism = P || Infinity;
+    parallelism = parallelism || Infinity;
 
     queue.defer = function() {
       if (!error) {
