@@ -1,4 +1,4 @@
-# queue.js
+# queue.js, Overcomplicated
 
 This is a folk of mbostock's queue.js that vastly overcomplicates
 the original module by requiring you to explicitly state where the
@@ -15,6 +15,7 @@ For example, if you wanted to stat two files in parallel:
 queue()
     .defer(fs.stat, __dirname + "/../Makefile", queue.D)
     .defer(fs.stat, __dirname + "/../package.json", queue.D)
+    .defer(setTimeout, queue.D, 3000)
     .await(function(error, results) { console.log(results); });
 ```
 
@@ -43,7 +44,7 @@ example, when loading resources in a web browser.
 ### queue.defer(method[, arguments…])
 
 Adds the specified *method* to the queue, with any optional *arguments*.
-Use *queue.D* as the placeholder for the callback.
+Use *queue.D* for the callback argument.
 
 ### queue.await(callback)
 
