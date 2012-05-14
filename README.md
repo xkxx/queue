@@ -1,6 +1,13 @@
 # queue.js
 
- **Queue.js** is yet another asynchronous helper library for JavaScript. Think of it as a minimalist version of [Async.js](https://github.com/caolan/async) that allows fine-tuning over parallelism. Or, think of it as a version of [TameJs](http://tamejs.org/) that does not use code generation.
+This is a folk of mbostock's queue.js that vastly overcomplicates
+the original module by requiring you to explicitly state where the
+callback argument is supposed to go
+
+ **Queue.js** is yet another asynchronous helper library for JavaScript.
+ Think of it as a minimalist version of [Async.js](https://github.com/caolan/async)
+ that allows fine-tuning over parallelism. Or, think of it as a version of
+ [TameJs](http://tamejs.org/) that does not use code generation.
 
 For example, if you wanted to stat two files in parallel:
 
@@ -11,7 +18,8 @@ queue()
     .await(function(error, results) { console.log(results); });
 ```
 
-Or, if you wanted to run a bazillion asynchronous tasks (here represented as an array of closures) serially:
+Or, if you wanted to run a bazillion asynchronous tasks (here represented
+as an array of closures) serially:
 
 ```js
 var q = queue(1);
@@ -25,11 +33,17 @@ Queue.js can be run inside Node.js or in a browser.
 
 ### queue([parallelism])
 
-Constructs a new queue with the specified *parallelism*. If *parallelism* is not specified or is *0*, the queue has infinite parallelism. Otherwise, *parallelism* is a positive integer. For example, if *parallelism* is 1, then all tasks will be run in series. If *parallelism* is 3, then at most three tasks will be allowed to proceed concurrently; this is useful, for example, when loading resources in a web browser.
+Constructs a new queue with the specified *parallelism*. If *parallelism*
+is not specified or is *0*, the queue has infinite parallelism. Otherwise,
+*parallelism* is a positive integer. For example, if *parallelism* is 1,
+then all tasks will be run in series. If *parallelism* is 3, then at most
+three tasks will be allowed to proceed concurrently; this is useful, for
+example, when loading resources in a web browser.
 
 ### queue.defer(method[, arguments…])
 
-Adds the specified *method* to the queue, with any optional *arguments*. Use *queue.D* as the placeholder for the callback.
+Adds the specified *method* to the queue, with any optional *arguments*.
+Use *queue.D* as the placeholder for the callback.
 
 ### queue.await(callback)
 
