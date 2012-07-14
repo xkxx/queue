@@ -12,8 +12,8 @@
         head, tail, // singly-linked list of deferrals
         error = null,
         results = [],
-        await = noop,
-        D = {};
+        await = noop;
+    queue.D = {};
 
     parallelism = parallelism || Infinity;
 
