@@ -47,6 +47,7 @@
         // replace defer identifier queue.D with callback
         a.splice(a.indexOf(queue.D), 1, function(e, r) {
           --active;
+          if (error) return;
           if (e) {
             if (remaining) {
               // clearing remaining cancels subsequent callbacks
